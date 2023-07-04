@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    private ObstacleGroup obstacleGroup;
+    private void Start()
+    {
+        obstacleGroup = transform.parent.GetComponent<ObstacleGroup>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "ScoreCounter")
-        {
-            Destroy(transform.parent.gameObject);
-        }
+
+            obstacleGroup.OnHit(collision.tag);
+
     }
 }

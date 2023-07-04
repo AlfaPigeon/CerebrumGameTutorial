@@ -10,10 +10,14 @@ public class ObstacleGroup : MonoBehaviour
     [Header("Summon Obstacles")]
     [SerializeField] private GameObject SummonObstacle;
 
+    private ScoreManager scoreManager;
+    private PlayerController player;
+    private bool Lock = false;
     private void Start()
     {
+        player = FindObjectOfType<PlayerController>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         Setup();
-        Destroy(gameObject, 5f);
     }
     void Setup()
     {
@@ -27,5 +31,28 @@ public class ObstacleGroup : MonoBehaviour
         }
     }
 
+    public void OnHit(string tag)
+    {
+        if (Lock) return;
+
+        switch (tag)
+        {
+            case "ScoreCounter":
+                Lock = true;
+                scoreManager.SetScore(scoreManager.Score + 1);
+                break;
+
+            case "Player":
+                Lock = true;
+                player.Die();
+                break;
+
+
+
+        }
+
+        
+
+    }
 
 }

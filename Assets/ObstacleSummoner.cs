@@ -8,6 +8,7 @@ public class ObstacleSummoner : MonoBehaviour
     [SerializeField] private GameObject SummonObstacle;
     private void Start()
     {
+       
         StartCoroutine(IE_SommonObstacle());
     }
 
